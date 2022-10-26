@@ -7,7 +7,8 @@ public class ShotCounter : MonoBehaviour
 {
     private int mShotCounter = 0;
     private TextMeshProUGUI mText;
-    // Start is called before the first frame update
+
+    // Sets values and connects to function
     void Start()
     {
         mText = GetComponent<TextMeshProUGUI>();
@@ -15,23 +16,27 @@ public class ShotCounter : MonoBehaviour
         Enemy_Script.Died += IncreaseCounter;
     }
 
+    //Disconnects from function
     private void OnDestroy()
     {
         Enemy_Script.Died -= IncreaseCounter;
     }
 
+    //Reset counter
     public void ResetCounter()
     {
         mShotCounter = 0;
         UpdateText();
     }
 
+    //Increment counter
     private void IncreaseCounter()
     {
         mShotCounter++;
         UpdateText();
     }
 
+    //Update UI text
     private void UpdateText()
     {
         mText.text = mShotCounter.ToString();

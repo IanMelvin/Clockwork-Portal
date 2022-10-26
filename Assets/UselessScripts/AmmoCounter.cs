@@ -15,18 +15,12 @@ public class AmmoCounter : MonoBehaviour
     void Start()
     {
         mText = GetComponent<TextMeshProUGUI>();
-        FireBullet.GunFired += DecreaseCounter;
-        FireBullet.NewMag += NewMag;
-        FireBullet.DroppedMag += DroppedMag; 
         UpdateText();
         NeedUpdatedAmmoCount?.Invoke();
     }
 
     private void OnDestroy()
     {
-        FireBullet.GunFired -= DecreaseCounter;
-        FireBullet.NewMag -= NewMag;
-        FireBullet.DroppedMag -= DroppedMag;
     }
 
     private void DecreaseCounter()

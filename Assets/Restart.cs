@@ -5,20 +5,8 @@ using UnityEngine;
 
 public class Restart : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static void restartScene()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void restartScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name)
-;    }
 }

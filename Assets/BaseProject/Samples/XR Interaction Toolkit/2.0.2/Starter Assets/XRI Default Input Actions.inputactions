@@ -1027,7 +1027,7 @@
                 {
                     "name": "",
                     "id": "c7f6b839-f9eb-4a4a-8ffd-c1837cbf7d39",
-                    "path": "<XRController>{LeftHand}/touchpadClicked",
+                    "path": "<WMRSpatialController>{RightHand}/touchpadClicked",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",

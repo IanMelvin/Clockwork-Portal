@@ -3,27 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class FireBullet : MonoBehaviour
 {
+    //Bullet Stats
     [SerializeField] float mSpeed = 50f;
     [SerializeField] GameObject mBullet;
     [SerializeField] Transform mFirePoint;
 
+    //Input
     [SerializeField] InputActionAsset inputActions;
-    [SerializeField] GameObject droppedClipObj;
     private InputAction mDropMag1, mDropMag2;
-    bool droppedClip = false, outOfAmmo = false;
 
-    Transform magSpot;
+    //Reloading
+    [SerializeField] GameObject droppedClipObj;
+    bool droppedClip = false, outOfAmmo = false;
+    Transform magSpot, clip;
     GameObject newClip;
+
+    //UI Component
+    [SerializeField] TextMeshProUGUI mText;
+
+    //Ammo
     int totalAmmo, currentAmmo = 30;
 
-    public static event Action GunFired;
-    public static event Action<int> NewMag;
-    public static event Action DroppedMag;
-
-    // Start is called before the first frame update
+    // Setting Up reloading Input and locating the location for reloading
     void Start()
     {
         mDropMag1 = inputActions.FindActionMap("XRI LeftHand Interaction").FindAction("DropMag");
@@ -34,30 +39,30 @@ public class FireBullet : MonoBehaviour
         mDropMag2.performed += DropMag;
 
         magSpot = transform.GetChild(6);
-        AmmoCounter.OutOfAmmo += OutOfAmmo;
-        AmmoCounter.NeedUpdatedAmmoCount += SendingUpdatedAmmo;
+        clip = transform.GetChild(3);
     }
 
+    //Disconnecting from Input System
     private void OnDestroy()
     {
         mDropMag1.performed -= DropMag;
         mDropMag2.performed -= DropMag;
-        AmmoCounter.OutOfAmmo -= OutOfAmmo;
-        AmmoCounter.NeedUpdatedAmmoCount -= SendingUpdatedAmmo;
     }
 
     private void FixedUpdate()
     { 
         if(droppedClip && checkCollisons())
         {
+            //Get new ammo data
             totalAmmo = newClip.GetComponent<TotalAmmo>().ammo;
             currentAmmo = totalAmmo;
             Destroy(newClip);
+
+            //Update values
             droppedClip = false;
             outOfAmmo = false;
-            Transform clip = transform.GetChild(3);
             clip.gameObject.SetActive(true);
-            if(NewMag != null) NewMag(totalAmmo);
+            UpdateText();
         }
     }
 
@@ -75,26 +80,22 @@ public class FireBullet : MonoBehaviour
         return false;
     }
 
-    void OutOfAmmo()
-    {
-        outOfAmmo = true;
-    }
-
-    void SendingUpdatedAmmo()
-    {
-        NewMag(currentAmmo);
-    }
-
     public void Fire()
     {
         if(!droppedClip && !outOfAmmo)
         {
+            //Play Audio
             GetComponent<AudioSource>().Play();
+
+            //Spawn bullet
             GameObject spawnedBullet = Instantiate(mBullet, mFirePoint.position, mFirePoint.rotation);
             spawnedBullet.GetComponent<Rigidbody>().velocity = mSpeed * mFirePoint.forward;
             Destroy(spawnedBullet, 5f);
-            GunFired?.Invoke();
+
+            //Update Ammo
             currentAmmo--;
+            UpdateText();
+            if (currentAmmo <= 0) outOfAmmo = true;
         }
     }
 
@@ -102,14 +103,23 @@ public class FireBullet : MonoBehaviour
     {
         if (!droppedClip)
         {
-            Transform clip = transform.GetChild(3);
+            //Make existing clip invisible
             clip.gameObject.SetActive(false);
-            GameObject droppedClip = Instantiate(droppedClipObj, clip.position, clip.rotation);
-            droppedClip.SetActive(true);
-            Destroy(droppedClip, 5f);
-            DroppedMag?.Invoke();
+
+            //Spawn dropped clip
+            GameObject spawnedDropClip = Instantiate(droppedClipObj, clip.position, clip.rotation);
+            spawnedDropClip.SetActive(true);
+            Destroy(spawnedDropClip, 5f);
+
+            //update variables
+            droppedClip = true;
+            outOfAmmo = true;
         }
-        droppedClip = true;
-        outOfAmmo = true;
+    }
+
+    //Update Ammo Counter
+    void UpdateText()
+    {
+        mText.text = currentAmmo.ToString();
     }
 }
