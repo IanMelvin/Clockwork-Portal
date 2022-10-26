@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class WristUI : MonoBehaviour
 {
     public InputActionAsset inputActions;
+    [SerializeField] GameObject menu;
 
     private Canvas mWristUICanvas;
     private InputAction mMenu;
@@ -27,5 +28,46 @@ public class WristUI : MonoBehaviour
     public void ToggleMenu(InputAction.CallbackContext context)
     {
         mWristUICanvas.enabled = !mWristUICanvas.enabled;
+    }
+
+    public void OnButton()
+    {
+        menu.SetActive(true);
+        Debug.Log("On Button");
+    }
+
+    public void BackButton()
+    {
+        menu.SetActive(false);
+        Debug.Log("Back Button");
+    }
+
+    public void QuitButton()
+    {
+        Debug.Log("Quit Button");
+        Application.Quit();
+    }
+
+    public void HealthButton()
+    {
+        Debug.Log("Health Button");
+    }
+
+    public void KillCountButton()
+    {
+        Debug.Log("KillCount Button");
+    }
+    public void TimeButton()
+    {
+        Debug.Log("Time Button");
+    }
+    public void LoreButton()
+    {
+        Debug.Log("Lore Button");
+    }
+
+    public void SettingsButton()
+    {
+        Debug.Log("Settings Button");
     }
 }

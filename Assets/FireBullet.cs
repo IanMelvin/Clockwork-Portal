@@ -114,6 +114,10 @@ public class FireBullet : MonoBehaviour
             //update variables
             droppedClip = true;
             outOfAmmo = true;
+
+            //Update Ammo
+            currentAmmo = 0;
+            UpdateText();
         }
     }
 
