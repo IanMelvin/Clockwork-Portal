@@ -61,7 +61,7 @@ public class Enemy_Script : MonoBehaviour
     //Check bullet collisons
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("ammo"))
+        if (other.CompareTag("ammo") || other.CompareTag("melee"))
         {
             Died?.Invoke();
             Destroy(this.gameObject);
@@ -104,7 +104,7 @@ public class Enemy_Script : MonoBehaviour
     //Check distance from player, if close enough attack, then call attack cooldown coroutine
     private void checkDistance()
     {
-        if (Mathf.Abs(Vector3.Distance(transform.position, player.transform.position)) <= 2.5f && !hasAttacked)
+        if (Mathf.Abs(Vector3.Distance(transform.position, player.transform.position)) <= 1.0f && !hasAttacked)
         {
             if(UnityEngine.Random.Range(1, 3) % 2 == 0)
             {

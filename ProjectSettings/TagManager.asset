@@ -8,6 +8,9 @@ TagManager:
   - clip
   - ammo
   - Play-er
+  - shotgunRound
+  - Pistolclip
+  - melee
   layers:
   - Default
   - TransparentFX
