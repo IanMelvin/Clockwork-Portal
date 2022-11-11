@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class FireBullet : MonoBehaviour
 {
@@ -38,8 +39,8 @@ public class FireBullet : MonoBehaviour
         mDropMag2.Enable();
         mDropMag2.performed += DropMag;
 
-        magSpot = transform.GetChild(6);
-        clip = transform.GetChild(3);
+        magSpot = transform.GetChild(7);
+        clip = transform.GetChild(4);
     }
 
     //Disconnecting from Input System
@@ -101,7 +102,7 @@ public class FireBullet : MonoBehaviour
 
     public void DropMag(InputAction.CallbackContext context)
     {
-        if (!droppedClip)
+        if (!droppedClip && GetComponent<XRGrabInteractable>().interactorsSelecting.Count > 0)
         {
             //Make existing clip invisible
             clip.gameObject.SetActive(false);

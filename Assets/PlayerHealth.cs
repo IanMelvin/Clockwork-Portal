@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,11 +13,18 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameObject rightHandPrefab;
 
     //Health
-    [SerializeField] int health = 100;
+    static int health = 100;
     [SerializeField] int maxHealth = 100;
 
     //Hand Value
     int corruptedHands = 0;
+
+    public static event Action<int> healthUpdate;
+
+    public static int getHealth()
+    {
+        return health;
+    }
 
     //Get MeshRenders, connect to event, set health
     private void Start()
@@ -41,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log(change);
             health += change;
+            healthUpdate?.Invoke(health);
             UpdateHands();
             UpdateText();
         }
@@ -63,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Update Hands");
             corruptedHands = 1;
-            if (Random.Range(1, 3) % 2 == 0)
+            if (UnityEngine.Random.Range(1, 3) % 2 == 0)
             {
                 
             }

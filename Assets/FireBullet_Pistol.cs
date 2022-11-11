@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class FireBullet_Pistol : MonoBehaviour
 {
@@ -97,7 +98,7 @@ public class FireBullet_Pistol : MonoBehaviour
 
     public void DropMag(InputAction.CallbackContext context)
     {
-        if (!droppedClip)
+        if (!droppedClip && GetComponent<XRGrabInteractable>().interactorsSelecting.Count > 0)
         {
             //Spawn dropped clip
             GameObject spawnedDropClip = Instantiate(droppedClipObj, magSpot.position, magSpot.rotation);
