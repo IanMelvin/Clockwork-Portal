@@ -12,11 +12,12 @@ public class HealthText : MonoBehaviour
     void Start()
     {
         PlayerHealth.healthUpdate += UpdateText;
-        mText.text = "HP: " + mdefaultValue.ToString();
+        //mText.text = "HP: " + mdefaultValue.ToString();
     }
 
     private void OnEnable()
     {
+        Debug.Log(PlayerHealth.getHealth());
         UpdateText(PlayerHealth.getHealth());
     }
 

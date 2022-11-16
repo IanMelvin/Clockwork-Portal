@@ -7,10 +7,10 @@ using System;
 public class PlayerHealth : MonoBehaviour
 {
     //Objects for hands
-    [SerializeField] Material baseMaterial;
-    [SerializeField] Material wireMaterial;
-    [SerializeField] GameObject leftHandPrefab;
-    [SerializeField] GameObject rightHandPrefab;
+    [SerializeField] Material[] baseMaterial;
+    [SerializeField] Material[] wireMaterial;
+    [SerializeField] GameObject leftHand;
+    [SerializeField] GameObject rightHand;
     [SerializeField] GameObject healingParticles_Left;
     [SerializeField] GameObject healingParticles_Right;
 
@@ -20,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
 
     //Hand Value
     int corruptedHands = 0;
+    SkinnedMeshRenderer leftHandRenderer;
+    SkinnedMeshRenderer rightHandRenderer;
 
     public static event Action<int> healthUpdate;
 
@@ -78,11 +80,15 @@ public class PlayerHealth : MonoBehaviour
     //Update Material for hands
     void UpdateHands()
     {
-        if(health <= (maxHealth / 4) && corruptedHands != 2)
+        leftHandRenderer = leftHand.GetComponentInChildren<SkinnedMeshRenderer>();
+        rightHandRenderer = rightHand.GetComponentInChildren<SkinnedMeshRenderer>();
+
+        if (health <= (maxHealth / 4) && corruptedHands != 2)
         {
             Debug.Log("Update 2 Hands");
             corruptedHands = 2;
-            
+            leftHandRenderer.materials = wireMaterial;
+            rightHandRenderer.materials = wireMaterial;
         }
         else if (health <= (maxHealth / 2) && corruptedHands != 1)
         {
@@ -90,18 +96,21 @@ public class PlayerHealth : MonoBehaviour
             corruptedHands = 1;
             if (UnityEngine.Random.Range(1, 3) % 2 == 0)
             {
-                
+                leftHandRenderer.materials = wireMaterial;
+                rightHandRenderer.materials = baseMaterial;
             }
             else
             {
-                
+                leftHandRenderer.materials = wireMaterial;
+                rightHandRenderer.materials = baseMaterial;
             }
         }
         else if(health > (maxHealth / 2) && corruptedHands != 0)
         {
             Debug.Log("Reset Hands");
             corruptedHands = 0;
-            
+            leftHandRenderer.materials = baseMaterial;
+            rightHandRenderer.materials = baseMaterial;
         }
     }
 
