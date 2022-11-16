@@ -11,10 +11,12 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Material wireMaterial;
     [SerializeField] GameObject leftHandPrefab;
     [SerializeField] GameObject rightHandPrefab;
+    [SerializeField] GameObject healingParticles_Left;
+    [SerializeField] GameObject healingParticles_Right;
 
     //Health
     static int health = 100;
-    [SerializeField] int maxHealth = 100;
+    [SerializeField] public int maxHealth = 100;
 
     //Hand Value
     int corruptedHands = 0;
@@ -57,6 +59,20 @@ public class PlayerHealth : MonoBehaviour
         {
             Restart.restartScene();
         }
+
+        if(change > 0)
+        {
+            StartCoroutine("timerForHealthParticles");
+        }
+    }
+
+    IEnumerator timerForHealthParticles()
+    {
+        healingParticles_Left.SetActive(true);
+        healingParticles_Right.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        healingParticles_Left.SetActive(false);
+        healingParticles_Right.SetActive(false);
     }
 
     //Update Material for hands
