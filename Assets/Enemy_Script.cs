@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.AI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Enemy_Script : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class Enemy_Script : MonoBehaviour
     //Check bullet collisons
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("ammo") || other.CompareTag("melee"))
+        if (other.CompareTag("ammo") || (other.CompareTag("melee") && other.gameObject.GetComponent<XRGrabInteractable>()?.interactorsSelecting.Count > 0))
         {
             Died?.Invoke();
             Destroy(this.gameObject);
