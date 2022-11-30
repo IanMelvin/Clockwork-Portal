@@ -11,5 +11,7 @@ public class portalScript : MonoBehaviour
             Debug.Log("You Win");
             Application.Quit();
         }
+
+        Debug.Log(other.name);
     }
 }

@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI clockObj;
     [SerializeField] TextMeshProUGUI WristUI_Clock;
     [SerializeField] TextMeshProUGUI WristUI_Lore;
+    [SerializeField] Rigidbody door;
 
     [SerializeField] List<TextScript> lore;
 
     float timer = 0;
     bool startTimer = false;
+
+    public static event Action startGame;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        door.freezeRotation = true;
     }
 
     // Update is called once per frame
@@ -82,11 +87,18 @@ public class GameManagerScript : MonoBehaviour
     public void EnableTimer()
     {
         startTimer = true;
+        startGame?.Invoke();
+        door.freezeRotation = false;
     }
 
     public string checkIfLoreIsCollected(int number)
     {
-        if(lore[number].GetWasPickedUp())
+        if(number > lore.Count - 1)
+        {
+            return "Error: LoreFailed";
+        }
+
+        if (lore[number].GetWasPickedUp())
         {
             return lore[number].getText(0);
         }
