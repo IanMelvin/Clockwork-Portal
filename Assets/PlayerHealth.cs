@@ -101,8 +101,8 @@ public class PlayerHealth : MonoBehaviour
             }
             else
             {
-                leftHandRenderer.materials = wireMaterial;
-                rightHandRenderer.materials = baseMaterial;
+                leftHandRenderer.materials = baseMaterial;
+                rightHandRenderer.materials = wireMaterial;
             }
         }
         else if(health > (maxHealth / 2) && corruptedHands != 0)

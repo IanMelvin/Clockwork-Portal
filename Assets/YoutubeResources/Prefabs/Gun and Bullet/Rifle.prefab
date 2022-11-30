@@ -1140,8 +1140,8 @@ GameObject:
   - component: {fileID: 5218337283895011107}
   - component: {fileID: 7847601998988387269}
   - component: {fileID: 3428935140845771103}
-  - component: {fileID: 8002010850319930439}
   - component: {fileID: 6386827435411451381}
+  - component: {fileID: 6742992967251836409}
   m_Layer: 7
   m_Name: Rifle
   m_TagString: Untagged
@@ -1297,7 +1297,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8002010850319930439
+--- !u!114 &6386827435411451381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1306,7 +1306,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8538042132930140477}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bc9094d4726e274997fe8cd64c68c77, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a2c4896992d81e448b2cb45f6a884a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSpeed: 50
+  mBullet: {fileID: 524176841774361810, guid: 65f89b1ce9fb9df42b98505fed9a8def, type: 3}
+  mFirePoint: {fileID: 3428935139571113442}
+  inputActions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  droppedClipObj: {fileID: 7568892293585816445, guid: 0103c075b7acff64f9eda0b77312f5e5,
+    type: 3}
+  mText: {fileID: 789117967045690833}
+--- !u!114 &6742992967251836409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538042132930140477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -1317,7 +1337,7 @@ MonoBehaviour:
   m_InteractionLayers:
     m_Bits: 2
   m_DistanceCalculationMode: 1
-  m_SelectMode: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -1429,24 +1449,3 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
-  secondAttachTransform: {fileID: 6500070668794910171}
---- !u!114 &6386827435411451381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8538042132930140477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a2c4896992d81e448b2cb45f6a884a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mSpeed: 50
-  mBullet: {fileID: 524176841774361810, guid: 65f89b1ce9fb9df42b98505fed9a8def, type: 3}
-  mFirePoint: {fileID: 3428935139571113442}
-  inputActions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  droppedClipObj: {fileID: 7568892293585816445, guid: 0103c075b7acff64f9eda0b77312f5e5,
-    type: 3}
-  mText: {fileID: 789117967045690833}

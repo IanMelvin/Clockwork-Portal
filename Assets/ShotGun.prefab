@@ -386,8 +386,8 @@ GameObject:
   - component: {fileID: 6356049078569424590}
   - component: {fileID: 5924433286138575498}
   - component: {fileID: 6142496398001320052}
-  - component: {fileID: 7690774149189603570}
   - component: {fileID: 831861332552690022}
+  - component: {fileID: -5968081110046257530}
   m_Layer: 0
   m_Name: ShotGun
   m_TagString: Untagged
@@ -541,7 +541,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &7690774149189603570
+--- !u!114 &831861332552690022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -550,7 +550,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2017476688652531272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bc9094d4726e274997fe8cd64c68c77, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ec86d179b69f40409f175aba3ee33c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSpeed: 50
+  numBullets: 6
+  mBullet: {fileID: 524176841774361810, guid: 65f89b1ce9fb9df42b98505fed9a8def, type: 3}
+  mFirePoint: {fileID: 9125578895836106190}
+  droppedClipObj: {fileID: 4443790964806382335, guid: 8d7f2088a641ddb418ed9894c99cb9ea,
+    type: 3}
+  spread: 0
+--- !u!114 &-5968081110046257530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017476688652531272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -561,7 +580,7 @@ MonoBehaviour:
   m_InteractionLayers:
     m_Bits: 2
   m_DistanceCalculationMode: 1
-  m_SelectMode: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -590,7 +609,8 @@ MonoBehaviour:
   m_Activated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 831861332552690022}
+      - m_Target: {fileID: 1185811344187585084, guid: 029c041c331bb0c4cb4b48887b6508da,
+          type: 3}
         m_TargetAssemblyTypeName: FireBullet_Shotgun, Assembly-CSharp
         m_MethodName: Fire
         m_Mode: 1
@@ -632,7 +652,8 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 8683044215733801337}
+  m_AttachTransform: {fileID: 7169689849246550563, guid: 029c041c331bb0c4cb4b48887b6508da,
+    type: 3}
   m_UseDynamicAttach: 0
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
@@ -644,11 +665,11 @@ MonoBehaviour:
   m_AngularVelocityDamping: 1
   m_AngularVelocityScale: 1
   m_TrackPosition: 1
-  m_SmoothPosition: 1
+  m_SmoothPosition: 0
   m_SmoothPositionAmount: 5
   m_TightenPosition: 0.5
   m_TrackRotation: 1
-  m_SmoothRotation: 1
+  m_SmoothRotation: 0
   m_SmoothRotationAmount: 5
   m_TightenRotation: 0.5
   m_ThrowOnDetach: 1
@@ -673,26 +694,6 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
-  secondAttachTransform: {fileID: 6781460339973325363}
---- !u!114 &831861332552690022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2017476688652531272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec86d179b69f40409f175aba3ee33c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mSpeed: 50
-  numBullets: 6
-  mBullet: {fileID: 524176841774361810, guid: 65f89b1ce9fb9df42b98505fed9a8def, type: 3}
-  mFirePoint: {fileID: 9125578895836106190}
-  droppedClipObj: {fileID: 4443790964806382335, guid: 8d7f2088a641ddb418ed9894c99cb9ea,
-    type: 3}
-  spread: 0
 --- !u!1 &2081157482600359339
 GameObject:
   m_ObjectHideFlags: 0

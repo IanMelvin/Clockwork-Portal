@@ -86,7 +86,14 @@ public class Enemy_Script : MonoBehaviour
     //Check bullet collisons
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("ammo") || (other.CompareTag("melee") && other.gameObject.GetComponent<XRGrabInteractable>()?.interactorsSelecting.Count > 0))
+        if (other.CompareTag("ammo"))
+        {
+            Died?.Invoke();
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+
+        if (other.CompareTag("melee") && other.gameObject.GetComponent<XRGrabInteractable>()?.interactorsSelecting.Count > 0)
         {
             Died?.Invoke();
             Destroy(this.gameObject);
