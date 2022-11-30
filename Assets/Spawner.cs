@@ -11,6 +11,8 @@ public class Spawner : MonoBehaviour
 
     static int numEnemiesDead = 0;
 
+    bool startedSpawner = false;
+
     public static int getNumEnemiesDead()
     {
         return numEnemiesDead;
@@ -31,20 +33,18 @@ public class Spawner : MonoBehaviour
         Enemy_Script.Died -= UpdateKillCount;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if(Time.time - startTime >= timeBetween && Mathf.Abs(Vector3.Distance(transform.position, player.transform.position)) <= 50.0f)
+        if (Mathf.Abs(Vector3.Distance(transform.position, player.transform.position)) <= 50.0 && !startedSpawner)
         {
-            startTime = Time.time;
-            SpawnAlot();
+            startedSpawner = true;
+            StartCoroutine("spawnCoolDown");
         }
-
     }
 
     void SpawnAlot()
     {
-        for(int i = 0; i <= 3; i++)
+        for(int i = 0; i <= 5; i++)
         {
             Spawn();
         }
