@@ -10,6 +10,7 @@ public class Enemy_Script : MonoBehaviour
     //Attacking properties
     [SerializeField] int damageToPlayer = 10;
     [SerializeField] float timeBetweenAttacks = 2.0f;
+    [SerializeField] GameObject LOSpoint;
     bool hasAttacked;
 
     //Enemy properties
@@ -45,18 +46,41 @@ public class Enemy_Script : MonoBehaviour
     // Check if enemy should go towards player or portal
     void FixedUpdate()
     {
-        if(!isPortalActive)
+        if(!isPortalActive && checkLOSOnPlayer())
         {
             chasePlayer();
-            checkDistance();
+            attack();
         }
         else
         {
-            gotToPortal();
+            //gotToPortal();
         }
 
         //idle();
         //lyingDown();
+    }
+
+    private bool checkLOSOnPlayer()
+    {
+        if(Mathf.Abs(Vector3.Distance(transform.position, player.transform.position)) >= 50.0)
+        {
+            return false;
+        }
+
+        return true;
+
+        /*
+        LOSpoint.transform.LookAt(player.transform.position);
+        RaycastHit hit;
+        Physics.Raycast(LOSpoint.transform.position, new Vector3(0.0f, 0.0f, 1.0f), out hit, 50.0f);
+        Debug.Log(hit.collider.name);
+        Debug.DrawRay(LOSpoint.transform.position, new Vector3(0.0f, 0.0f, 1.0f) * hit.distance, Color.yellow);
+        if (hit.collider?.gameObject == player)
+        {
+            return true;
+        }
+        
+        return false;*/
     }
 
     //Check bullet collisons
@@ -103,7 +127,7 @@ public class Enemy_Script : MonoBehaviour
     }
 
     //Check distance from player, if close enough attack, then call attack cooldown coroutine
-    private void checkDistance()
+    private void attack()
     {
         if (Mathf.Abs(Vector3.Distance(transform.position, player.transform.position)) <= 1.0f && !hasAttacked)
         {

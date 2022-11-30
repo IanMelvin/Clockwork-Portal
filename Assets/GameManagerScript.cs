@@ -9,7 +9,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI clockObj;
     [SerializeField] TextMeshProUGUI WristUI_Clock;
     [SerializeField] TextMeshProUGUI WristUI_Lore;
-    [SerializeField] Rigidbody door;
+    [SerializeField] GameObject door;
 
     [SerializeField] List<TextScript> lore;
 
@@ -21,7 +21,7 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        door.freezeRotation = true;
+
     }
 
     // Update is called once per frame
@@ -88,7 +88,7 @@ public class GameManagerScript : MonoBehaviour
     {
         startTimer = true;
         startGame?.Invoke();
-        door.freezeRotation = false;
+        door.SetActive(false);
     }
 
     public string checkIfLoreIsCollected(int number)

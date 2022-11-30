@@ -21,7 +21,6 @@ public class PortalManager : MonoBehaviour
         GameManagerScript.startGame -= StartGame;
     }
 
-
     private void StartGame()
     {
         StartCoroutine("waitTillPortalOnTime");
