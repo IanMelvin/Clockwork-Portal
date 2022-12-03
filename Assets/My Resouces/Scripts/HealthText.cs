@@ -6,13 +6,11 @@ using TMPro;
 public class HealthText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI mText;
-    [SerializeField] int mdefaultValue = 100;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerHealth.healthUpdate += UpdateText;
-        //mText.text = "HP: " + mdefaultValue.ToString();
     }
 
     private void OnEnable()
